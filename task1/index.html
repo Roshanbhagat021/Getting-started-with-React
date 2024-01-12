@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate Code</title>
+  </head>
+  <body style="margin: auto;">
+    <div id="root">
+   
+    </div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Code goes here
+
+    
+    const APP=()=>{
+        const [count,setCount]=React.useState(0)
+        
+
+        return(
+            <div style={{margin:"auto" ,width:"12%"}}>
+                <h1>Counter App</h1>
+                <button  onClick={()=>setCount(count+1)}>Increment {count}</button>
+            </div>
+         
+        )
+    }
+
+
+    let rootElement=ReactDOM.createRoot(document.getElementById("root"))
+
+    rootElement.render(<APP />)
+
+  </script>
+</html>
+
