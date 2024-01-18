@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX Coding Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        #root {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+        // Styling
+
+
+        let containerStyling = {
+            width: "40vw",
+            display: "flex",
+            alignItems: "center",
+            padding: "3vw",
+            gap: "1vw",
+            fontSize: "2vw",
+            flexDirection: "column",
+            borderRadius: "0.5vw",
+            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+            backgroundColor: "white"
+        }
+
+
+        let divStyling = {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1vw"
+        }
+
+
+        let btnStyling = {
+            fontSize: "1.4vw",
+            padding: "0.8vw 1vw",
+            borderRadius: "0.5vw",
+            backgroundColor: "blue",
+            color: "white",
+            border: "none",
+        }
+
+
+
+        // Main Component
+        function Main({ btnText, setBtnText, flag, setFlag }) {
+
+            
+            function HandleToogle() {
+                flag == true ? (alert("Hello 🙏"), setBtnText("Alert Bye"), setFlag(false)) : (alert("Bye 👋"), setBtnText("Alert Hello"), setFlag(true))
+            }
+
+
+
+            let [word1, word2] = btnText.split(" ")
+            return (
+                <>
+                    <div style={divStyling} className="main">
+                        <p >Click the below button to alert <span style={{ color: "orange" }}>'{word2}'</span></p>
+                        <button style={btnStyling} onClick={HandleToogle}>{btnText}</button>
+                    </div>
+                </>
+            )
+        }
+
+
+        // MyComponent Component 
+        function MyComponent() {
+
+            const [btnText, setBtnText] = React.useState("Alert Hello")
+            const [flag, setFlag] = React.useState(true)
+
+            return (
+                <>
+                    <div style={containerStyling} >
+                        <p style={{ textDecoration: "underline", textDecorationColor: "blue" }}>React is Javascript a library</p>
+                        <Main btnText={btnText} setBtnText={setBtnText} flag={flag} setFlag={setFlag} />
+                    </div>
+
+                </>
+            )
+        }
+
+
+
+        // App componetn
+        function App() {
+            return (
+                <>
+                    <MyComponent />
+                </>
+            )
+        }
+
+        let rootElement = ReactDOM.createRoot(document.getElementById("root"))
+        rootElement.render(<App />)
+
+    </script>
+</body>
+
+</html>
