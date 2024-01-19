@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX syntax Deep dive</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="secondDiv"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+        // variable for embedding in jsx
+        let statement = " YES,I Agree";
+
+        // function for embedding in jsx
+        const handelClick = () => alert("Your are a real developer 👨‍💻")
+
+
+        // array for embedding in jsx
+        let rating = [1, 2, 3, 4, 5];
+        let loginText = ["Login", "No thanks"];
+
+
+        // Component for coditional rendering
+        function ConditionalRendering() {
+
+            function handelLogin(text) {
+                let element;
+
+                // checking the condition and rendering the element
+                text == "Login" ? (element = (<>
+
+                    <ul title="About JSX">
+                        <li>It is a syntax extension for JavaScript that looks similar to XML or HTML.</li>
+                        <li>JSX allows you to write UI components in a more expressive and concise manner.</li>
+                        <li>You can embed JavaScript expressions within curly braces { } in JSX.</li>
+                        <li>Components can be created using custom tags, making the code more modular and reusable.</li>
+                        <li>JSX code needs to be transformed into JavaScript using tools like Babel before it can be executed in the browser.</li>
+                    </ul>
+                </>)) : (element = (<><h1 title="Just kidding">OK BYE THEN 👋 </h1></>))
+                let secondDiv = ReactDOM.createRoot(document.getElementById("secondDiv"))
+                secondDiv.render(element)
+            }
+
+
+            return (
+                <>
+                    <h2>If you want to know more about JSX first Login</h2>
+                    {loginText.map((text) => {
+                        return <button onClick={() => handelLogin(text)}>{text}</button>
+                    })}
+                </>
+            )
+        }
+
+
+        function RateJSX_Syntax() {
+            return (
+                <div>
+                    {/*Embeding array in jsx*/}
+                    {rating.map((number) => {
+                        return <button onClick={() => number == 1 ? (alert("noob")) : number == 2 ? (alert("still noob")) : number == 3 ? (alert("Are you sure?")) : number == 4 ? (alert("You are at right path")) : number == 5 ? (alert("You are a real developer 👨‍💻")) : alert("For you sky is the limit")}>{number}</button>
+                    })}
+                </div>
+
+            )
+        }
+
+
+        // JSXShowcase Component
+        function JSXShowcase() {
+            return (
+                <>
+                    {/* Rendering a veriaty of elements like div, h1, p, button  */}
+                    <div>
+                        <h1>The Power of JSX</h1>
+                        <p>The syntax of JSX makes the development easier do you agree.</p>
+                        {/*Embedding js expression in jsx like variables(statement) ,function(handelClick) */}
+                        <button onClick={handelClick}>{statement}</button>
+                        <hr />
+
+                        <h2>Between 1 to 5 what would you rate the Syntax of JSX</h2>
+                        <RateJSX_Syntax />
+                        <hr />
+
+                        <ConditionalRendering />
+                    </div>
+                </>
+            )
+        }
+
+
+
+        // App component (it is the main component )
+        const App = () => {
+            return (
+                <>
+                    <JSXShowcase />
+                </>
+            )
+        }
+
+
+        // Creating the root Element for React 
+        let rootElement = ReactDOM.createRoot(document.getElementById("root"))
+
+        // rendering the App component
+        rootElement.render(<App />)
+
+    </script>
+</body>
+</html>

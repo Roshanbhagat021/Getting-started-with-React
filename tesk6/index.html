@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+
+        // Styling
+
+
+        let HeaderStyling = {
+            textAlign: "center",
+            padding: "1rem",
+            backgroundColor: "lightblue",
+        }
+
+
+        let ContentStyling = {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "2rem"
+        }
+
+
+        let MainStyling = {
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
+            fontSize: "2rem"
+        }
+
+        let FooterStyling = {
+            backgroundColor: "black",
+            display: "flex",
+            justifyContent: "space-between",
+            color: "white",
+            padding: "1rem"
+
+        }
+
+        let btnStyling = {
+            padding: "0.5rem",
+            backgroundColor: "orange",
+            borderRadius: "0.5rem",
+            color: "black",
+            border: "none"
+        }
+
+
+
+        // Header component
+        function Header({ text, setText, SocialMedia2, setSocialMedia1, setSocialMedia2 }) {
+            function handelSocialMediabtn(text) {
+                text == "Show" ? (setSocialMedia1("LinkedIn"), setSocialMedia2("Github"), setText("Hide")) : (setSocialMedia1(""), setSocialMedia2(""), setText("Show"))
+            }
+            return (
+                <div style={HeaderStyling}>
+                    <h1>Header <button style={btnStyling} onClick={() => handelSocialMediabtn(text)}>{text} Social Media</button></h1>
+                </div>
+            )
+        }
+
+        // Middel or content component
+        function Content() {
+            return (
+                <div style={ContentStyling}>
+                    <h1>Hi I am Roshan learning React</h1>
+                </div>
+            )
+        }
+      
+
+
+        // footer component
+        function Footer({ SocialMedia1, SocialMedia2 }) {
+            return (
+                <div style={FooterStyling}>
+                    <p>Copywrite© all this is free </p>
+                    <div style={{ display: "flex", gap: "2rem" }}>
+                        <a href="https://www.linkedin.com/in/roshan-kumar-bhagat-inprofile/" target="_blank">{SocialMedia1}</a>
+                        <a href="https://github.com/Roshanbhagat021" target="_blank" >{SocialMedia2}</a>
+                    </div>
+                </div>
+            )
+        }
+
+
+        // the app or main component
+        const App = () => {
+            const [socialMedia1, setSocialMedia1] = React.useState("")
+            const [socialMedia2, setSocialMedia2] = React.useState("")
+            const [btnText, setbtnText] = React.useState("Show")
+
+            return (
+                <div style={MainStyling} >
+                    <Header text={btnText} setText={setbtnText} SocialMedia1={socialMedia1} SocialMedia2={socialMedia2} setSocialMedia1={setSocialMedia1} setSocialMedia2={setSocialMedia2} />
+                    <Content />
+                    <Footer SocialMedia1={socialMedia1} SocialMedia2={socialMedia2} />
+                </div>
+            )
+        }
+
+        let rootElement = ReactDOM.createRoot(document.getElementById("root"))
+        rootElement.render(<App />)
+    </script>
+
+</body>
+
+</html>
