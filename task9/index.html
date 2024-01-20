@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Component</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Code goes here
+
+    function getRandomLightColor() {
+        const red = Math.floor(Math.random() * 146) + 100; 
+        const green = Math.floor(Math.random() * 146) + 100;
+        const blue = Math.floor(Math.random() * 146) + 100;
+        return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+    }
+
+
+
+    const BirthdayCard = ({ name, setName, massage, setMassage }) => {
+        function handelNameChange(e) {
+            let value = e.target.value
+            let backgroundColor = (value.length > 5 ? getRandomLightColor() : "#FFA500")
+            setColor(backgroundColor)
+            setName(e.target.value)
+        }
+
+
+        function handelMassageChage(e) {
+            setMassage(e.target.value)
+        }
+
+
+        function handelReset() {
+            setMassage("")
+            setName("")
+            setColor("#FFA500")
+        }
+
+
+        let [color, setColor] = React.useState("#FFA500")
+        return (
+            <div style={{ backgroundColor: color }}>
+
+                <h1>Happy Birthday,<strong>{name} {massage} </strong></h1>
+                <label>Name:
+                    <input type="text" placeholder="Name" name="name" value={name} onChange={handelNameChange} />
+                </label><br />
+                <label>Massage:
+                    <input placeholder="Your Well Wishes" name="Massage" value={massage} onChange={handelMassageChage} />
+                </label><br />
+                <button onClick={handelReset}>Reset</button>
+            </div>
+        )
+    }
+
+
+
+    const App = () => {
+        let [name, setName] = React.useState("")
+        let [massage, setMassage] = React.useState("")
+
+        return (
+            <>
+                <BirthdayCard name={name} setName={setName} massage={massage} setMassage={setMassage} />
+
+            </>
+        )
+    }
+
+    let rootElement = ReactDOM.createRoot(document.getElementById("root"))
+    rootElement.render(<App />)
+
+
+</script>
+
+</html>
