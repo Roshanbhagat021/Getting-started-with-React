@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate Code</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family:  sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #root {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        h2 {
+            text-align: left;
+            margin-block: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+
+// console.log(celsius)
+
+    function Temperature() {
+        function handelCelsiusClick(event){
+            let Temperature=event.target.value;
+            let inFahrenheit=(Temperature*9/5)+32;
+            setCelsius(Temperature)
+            setFahrenheit(Temperature==""?Temperature:inFahrenheit)
+        }
+
+
+
+        function handelFahrengietClick(event){
+            let Temperature=event.target.value;
+            let inCelsius=(Temperature-32)*5/9
+            setFahrenheit(Temperature)
+            setCelsius(Temperature==""?Temperature:inCelsius)
+        }
+
+
+
+
+        const [celsius,setCelsius]=React.useState()
+        const [fahrenheit,setFahrenheit]=React.useState()
+
+        return (
+            <>
+            <h2>Temperature in Celsius: {celsius>=0?celsius+"°C":celsius}</h2>
+            <h2>Temperature in Fahrenheit: {fahrenheit>=0?fahrenheit+"°F":fahrenheit}</h2>
+                <label>Write Temperature In Celsius 
+                    <input type="number" onChange={handelCelsiusClick}  value={celsius} placeholder="Celsius " />
+                </label><br/>
+                <label>Write Temperature In Fahrenheit 
+                    <input type="number" onChange={handelFahrengietClick} value={fahrenheit} placeholder="Fahrenheit " />
+                </label>
+            </>
+        )
+    }
+
+
+
+
+    function App() {
+        return (
+            <>
+            <Temperature/>
+            </>
+        )
+    }
+
+
+    let rootElement = ReactDOM.createRoot(document.getElementById("root"))
+    rootElement.render(<App />)
+
+</script>
+
+</html>
